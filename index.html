@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexsander - Desenvolvimento de Sites Sob Medida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0e14;
+            --text-color: #e2e8f0;
+            --accent-color: #14b8a6;
+            --gold-color: #d4af37;
+            --card-bg: #111827;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Background Sólido com Efeito de Luz (Blobs) */
+        .hero-bg {
+            background-color: #0a0e14;
+            position: relative;
+            overflow: hidden;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: float 12s infinite ease-in-out;
+        }
+        .blob-1 { width: 500px; height: 500px; background: #14b8a6; top: -150px; left: -150px; }
+        .blob-2 { width: 400px; height: 400px; background: #d4af37; bottom: -100px; right: -100px; animation-delay: 3s; opacity: 0.2; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-40px) scale(1.1); }
+        }
+
+        /* Carousel Animation */
+        @keyframes scroll-x {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .carousel-track {
+            display: flex;
+            animation: scroll-x 40s linear infinite;
+        }
+        .carousel-container:hover .carousel-track {
+            animation-play-state: paused;
+        }
+        
+        .custom-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .custom-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        
+        .text-accent { color: var(--accent-color); }
+        .text-gold { color: var(--gold-color); }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Responsividade do Vídeo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-opacity-80 backdrop-blur-md bg-[#0a0e14] border-b border-white/5">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl text-gold font-bold tracking-wider">ALEXSANDER<span class="text-accent">.</span></a>
+            <div class="hidden md:flex space-x-8 text-sm">
+                <a href="#filosofia" class="nav-link">Filosofia</a>
+                <a href="#porque" class="nav-link">Por que um site?</a>
+                <a href="#showcase" class="nav-link">Projetos</a>
+                <a href="#etapas" class="nav-link">Processo</a>
+            </div>
+            <a href="#contato" class="text-sm border border-[var(--accent-color)] text-[var(--accent-color)] px-4 py-2 rounded font-semibold hover:bg-[var(--accent-color)] hover:text-black transition-all">Contato</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero-bg h-screen flex items-center justify-center text-center">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="relative z-10 px-6 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-8 leading-tight reveal text-white">
+                Quem visitar seu site vai <span class="text-gold italic">SABER</span> e <span class="text-gold italic">ENTENDER</span> as soluções que você vende?
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 mb-10 reveal">
+                Combino cores, formas, imagens e textos, para despertar a curiosidade do seu cliente.
+            </p>
+            <a href="#filosofia" class="reveal inline-block border border-[var(--accent-color)] text-[var(--accent-color)] px-8 py-3 rounded hover:bg-[var(--accent-color)] hover:text-black transition-all duration-300">
+                Conheça meu trabalho
+            </a>
+        </div>
+    </header>
+
+    <!-- Filosofia / Pedra Lapidada -->
+    <section id="filosofia" class="py-24 px-6 bg-[#0a0e14]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 reveal">
+                <img src="https://z-cdn-media.chatglm.cn/files/a9ffad22-0463-4c20-934d-34559bb6f17d.jpg?auth_key=1890953382-6e6ce91728f242b4b68a8f3fbbc52a5f-0-0209f8878063ae1e275643c438f47d72" alt="Pedra Bruta e Cristal Lapidado" class="rounded-lg shadow-2xl w-full">
+            </div>
+            <div class="md:w-1/2 reveal">
+                <h2 class="text-3xl md:text-4xl mb-6 leading-snug text-white">
+                    Não construo websites. <br> <span class="text-accent italic">Lapido</span> sua representação comercial.
+                </h2>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    Que vai carregar sua marca, as soluções que sua empresa vende e a história que trouxe ela até aqui. Um serviço exclusivo e detalhista, longe do padrão industrial.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por que Possuir um Site -->
+    <section id="porque" class="py-24 px-6 relative bg-[#111827]">
+        <div class="max-w-5xl mx-auto text-center mb-16 reveal">
+            <h2 class="text-3xl md:text-5xl mb-4 text-white">O porquê de existir no ambiente digital</h2>
+            <p class="text-slate-300 text-lg max-w-3xl mx-auto">O site de uma empresa faz parte do conjunto de técnicas de venda e, se for negligenciado, afeta o posicionamento dela no mercado.</p>
+        </div>
+        <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="custom-card p-8 rounded-lg reveal text-center">
+                <h3 class="text-xl text-gold mb-4">Presença e Credibilidade</h3>
+                <p class="text-slate-400">Estar presente no ambiente digital onde seu cliente está, atesta credibilidade e segurança.</p>
+            </div>
+            <div class="custom-card p-8 rounded-lg reveal text-center">
+                <h3 class="text-xl text-gold mb-4">Fechamento de Negócio</h3>
+                <p class="text-slate-400">As informações do seu produto/serviço no site são uma das primeiras etapas do fechamento do negócio.</p>
+            </div>
+            <div class="custom-card p-8 rounded-lg reveal text-center">
+                <h3 class="text-xl text-gold mb-4">Valores e Crenças</h3>
+                <p class="text-slate-400">Além de conhecer seu produto/serviço, um site comunica os valores e crenças da sua empresa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE: Utilização dos 3 Vídeos -->
+    <section id="showcase" class="py-24 px-6 bg-[#0a0e14] border-b border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl mb-4 text-white">Projetos em Movimento</h2>
+                <p class="text-slate-400">Telas, fluxos e interfaces que unem estética e funcionalidade para uma experiência de usuário impecável.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Vídeo 1 -->
+                <div class="custom-card rounded-lg overflow-hidden reveal group">
+                    <div class="video-container">
+                        <iframe src="https://streamable.com/e/aoft5p" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- Vídeo 2 -->
+                <div class="custom-card rounded-lg overflow-hidden reveal group">
+                    <div class="video-container">
+                        <iframe src="https://streamable.com/e/qmahe5" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- Vídeo 3 -->
+                <div class="custom-card rounded-lg overflow-hidden reveal group">
+                    <div class="video-container">
+                        <iframe src="https://streamable.com/e/xdm1wg" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tipos de Sites -->
+    <section id="tipos" class="py-24 px-6 bg-[#0a0e14]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl mb-4 text-white">Formatos e possibilidades</h2>
+                <p class="text-slate-400">Cada negócio tem uma necessidade. Estes são os tipos de sites que desenvolvo sob medida.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="custom-card p-6 rounded-lg reveal">
+                    <h3 class="text-xl text-accent mb-3 border-b border-white/10 pb-2">Institucionais</h3>
+                    <p class="text-slate-400 text-sm">Sites focados em apresentar a história, missão, visão e portfólio da empresa. Ideais para construir marca e confiança.</p>
+                </div>
+                <div class="custom-card p-6 rounded-lg reveal">
+                    <h3 class="text-xl text-accent mb-3 border-b border-white/10 pb-2">Landing Pages</h3>
+                    <p class="text-slate-400 text-sm">Páginas de conversão única, criadas estrategicamente para campanhas específicas, captação de leads ou lançamento de produtos.</p>
+                </div>
+                <div class="custom-card p-6 rounded-lg reveal">
+                    <h3 class="text-xl text-accent mb-3 border-b border-white/10 pb-2">Portfólios</h3>
+                    <p class="text-slate-400 text-sm">Galerias elegantes e dinâmicas para fotógrafos, arquitetos, designers e artistas que precisam exibir seus trabalhos com impacto.</p>
+                </div>
+                <div class="custom-card p-6 rounded-lg reveal">
+                    <h3 class="text-xl text-accent mb-3 border-b border-white/10 pb-2">E-commerce / Catálogos</h3>
+                    <p class="text-slate-400 text-sm">Sistemas para venda direta ou vitrines virtuais que exibem produtos de forma organizada e atraente para o consumidor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrossel em Movimento Constante -->
+    <section class="py-16 overflow-hidden border-y border-white/5 bg-[#111827]">
+        <div class="text-center mb-10 reveal">
+            <h2 class="text-2xl text-slate-300">Estética e Tecnologia em Harmonia</h2>
+        </div>
+        <div class="carousel-container relative">
+            <div class="carousel-track">
+                <!-- Novas Imagens do Carrossel -->
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5310a408-f859-4868-905c-99e4e2c2f6e7.jpg?auth_key=1890968393-5f91c93e02754b46906bec96c2692e67-0-7c4f026fdfe60eefe6822d44376768e5" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/cf0b1250-a21d-4cb0-a7c7-30911986f155.jpg?auth_key=1890968393-ce6c6dd5d4434deeb798ffaf44afa14e-0-ff98f16312820f183b635dafff6f519b" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/4c17b463-6335-4b3f-86e3-94496bde1f59.jpg?auth_key=1890968393-b90350a7222e43ff86a3b8eeec14ce52-0-1eeee34a587fce7e1c7696793256e309" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Cópias para o Loop Infinito -->
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5310a408-f859-4868-905c-99e4e2c2f6e7.jpg?auth_key=1890968393-5f91c93e02754b46906bec96c2692e67-0-7c4f026fdfe60eefe6822d44376768e5" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/cf0b1250-a21d-4cb0-a7c7-30911986f155.jpg?auth_key=1890968393-ce6c6dd5d4434deeb798ffaf44afa14e-0-ff98f16312820f183b635dafff6f519b" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-shrink-0 w-[350px] h-[230px] mx-4 rounded-lg overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/4c17b463-6335-4b3f-86e3-94496bde1f59.jpg?auth_key=1890968393-b90350a7222e43ff86a3b8eeec14ce52-0-1eeee34a587fce7e1c7696793256e309" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Etapas da Construção -->
+    <section id="etapas" class="py-24 px-6 bg-[#0a0e14]">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl mb-4 text-white">As etapas da construção de um site</h2>
+                <p class="text-slate-400">Um processo metódico e detalhista, do conceito ao ar.</p>
+            </div>
+            <div class="relative border-l-2 border-[var(--accent-color)] pl-8 ml-4 space-y-12">
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">1. Exame</h3>
+                    <p class="text-slate-400 mt-2">Um exame detalhado da história, cultura, valores e portfólios de produtos e serviços.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">2. Estudo</h3>
+                    <p class="text-slate-400 mt-2">Estudo dos potenciais clientes.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">3. Projeto</h3>
+                    <p class="text-slate-400 mt-2">Projeto de layout, cores, formas, imagens e mensagens mais adequadas.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">4. Coleta</h3>
+                    <p class="text-slate-400 mt-2">Coleta de imagens, documentos, textos, descrições e etc.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">5. Construção</h3>
+                    <p class="text-slate-400 mt-2">Desenvolvimento técnico e codificação do site.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">8. Aprovação</h3>
+                    <p class="text-slate-400 mt-2">Aprovação e/ou ajustes por parte do cliente.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">9. Publicação</h3>
+                    <p class="text-slate-400 mt-2">Tornar o site online.</p>
+                </div>
+                <div class="reveal relative">
+                    <div class="absolute -left-[42px] top-1 w-4 h-4 bg-[var(--accent-color)] rounded-full"></div>
+                    <h3 class="text-xl text-gold">10. Visibilidade</h3>
+                    <p class="text-slate-400 mt-2">Preparar o site para ser encontrado na rede.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <footer id="contato" class="py-24 px-6 bg-[#111827] border-t border-white/5 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center reveal relative z-10">
+            <h2 class="text-3xl md:text-5xl mb-8 text-white">Vamos lapidar a presença da sua empresa?</h2>
+            <p class="text-slate-400 mb-10">Entre em contato para conversarmos sobre como elevar o posicionamento digital do seu negócio.</p>
+            
+            <p class="text-lg text-gold mb-6">Alexsander</p>
+            
+            <!-- BOTÃO WHATSAPP -->
+            <a href="https://wa.me/5511949456445?text=Ol%C3%A1%20Alexsander,%20vim%20atrav%C3%A9s%20do%20seu%20portf%C3%B3lio%20digital." target="_blank" class="btn-whatsapp inline-flex items-center justify-center gap-3 text-lg font-bold px-10 py-5 rounded-lg shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.458-4.434-9.892-9.885-9.894-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.746-.979zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+                WhatsApp: (11) 9494-56445
+            </a>
+            
+            <div class="mt-12 pt-8 border-t border-white/5 text-slate-500 text-sm">
+                <p>© 2024 Alexsander Studio. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para animação de revelação ao rolar a página
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+    </script>
+</body>
+</html>
